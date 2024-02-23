@@ -9,15 +9,11 @@ public class Zahlenspeicher {
         this.vorhandeneElemente = 0;
     }
 
-    public boolean hinzufügen(int zahl) {
+    public void hinzufügen(int zahl) {
         // Überprüfung der Kapazität
         if (this.vorhandeneElemente >= this.kapazität ) {
-            // Andere Strategie, wenn voll, dann Fehler
-            //System.out.println("Array ist voll, geht nix mehr");
-            return false; // <- Hinweise, dass die Zahl nicht hinzugefügt werden konnte
-
             // Array ist voll, wir brauchen mehr Platz
-            kapazität *= 2;
+            this.kapazität *= 2;
             int[] neuesArray = new int[ kapazität ];
             for (int i=0; i < this.array.length; i++) {
                 neuesArray[i] = this.array[i];
@@ -27,7 +23,21 @@ public class Zahlenspeicher {
 
         this.array[ this.vorhandeneElemente ] = zahl;
         this.vorhandeneElemente++;
-        return true;
+    }
+
+    public void löscheLetzteZahl() {
+        if (this.vorhandeneElemente > 0) {
+            this.vorhandeneElemente--;
+        }
+    }
+
+    public boolean suchen(int zahl) {
+        for (int i=0; i < this.vorhandeneElemente; i++) {
+            if (this.array[i] == zahl) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int anzahlElemente() {
